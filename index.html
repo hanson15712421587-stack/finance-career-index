@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>财经求职含金量指数 · 实时版｜韩司墨</title>
+<style>
+:root{
+ --bg:#08111f; --panel:#0f1a2c; --panel2:#13213a; --text:#edf3ff; --muted:#98a8c4;
+ --line:#253653; --accent:#7b9cff; --accent2:#63d9c2; --gold:#e8be69; --rose:#ef8aa5;
+ --good:#78d29d; --bad:#ef8aa5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:
+ radial-gradient(1000px 480px at 12% -5%,rgba(123,156,255,.16),transparent 55%),
+ radial-gradient(900px 500px at 100% 0%,rgba(99,217,194,.10),transparent 50%),
+ var(--bg);
+ color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+}
+.shell{max-width:1500px;margin:auto;padding:20px}
+.card{background:rgba(15,26,44,.92);border:1px solid var(--line);border-radius:18px}
+.hero{display:grid;grid-template-columns:1.45fr .55fr;gap:15px;margin-bottom:14px}
+.hero-main{padding:24px}
+.kicker{font-size:12px;letter-spacing:.12em;font-weight:800;color:var(--accent2)}
+h1{font-size:clamp(30px,4.2vw,52px);line-height:1.05;margin:8px 0 12px}
+.hero p{margin:0;color:var(--muted);line-height:1.75;font-size:14px}
+.profile{padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+.profile .small{font-size:11px;color:var(--muted)}
+.profile .big{font-size:15px;font-weight:800;margin-top:4px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badge{font-size:11px;border:1px solid var(--line);padding:6px 8px;border-radius:999px;background:#0b1425}
+.nav{position:sticky;top:6px;z-index:30;display:flex;flex-wrap:wrap;gap:7px;padding:8px;background:rgba(8,17,31,.85);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;margin-bottom:14px}
+.nav button,.btn,.filter button{
+ appearance:none;border:1px solid var(--line);background:#0d182a;color:var(--text);border-radius:10px;min-height:42px;padding:9px 12px;cursor:pointer;font-size:12px
+}
+.nav button.active,.btn.active{border-color:var(--accent);background:rgba(123,156,255,.15)}
+.page{display:none}.page.active{display:block}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.stat{padding:14px}.stat .label{font-size:11px;color:var(--muted)}.stat .value{font-size:27px;font-weight:900;margin-top:4px}.stat .hint{font-size:11px;color:var(--muted);line-height:1.45;margin-top:3px}
+.callout{padding:15px;margin-bottom:14px;color:var(--muted);font-size:13px;line-height:1.7}.callout b{color:var(--text)}
+.grid-main{display:grid;grid-template-columns:1.5fr .7fr;gap:14px;align-items:start}
+.controls{padding:13px;margin-bottom:11px}
+.control-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.control-row .label{font-size:11px;color:var(--muted)}
+.weight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.weight{padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#0b1425}
+.weight b{display:flex;justify-content:space-between;font-size:11px}
+.weight b em{color:var(--accent2);font-style:normal}
+.weight input[type=range]{width:100%;accent-color:var(--accent);margin-top:6px;height:18px}
+.weight span{display:block;font-size:10px;color:var(--muted);line-height:1.4;margin-top:2px}
+.role-list{display:flex;flex-direction:column;gap:9px}
+.role{padding:13px;border:1px solid var(--line);background:linear-gradient(180deg,#122039,#0f1a2e);border-radius:14px;cursor:pointer}
+.role:hover{border-color:#40577d}.role.selected{border-color:var(--accent);background:linear-gradient(180deg,rgba(35,53,92,.95),rgba(16,28,50,.95))}
+.role-row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px;align-items:start}
+.rank{width:30px;height:30px;border-radius:9px;background:#0a1324;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.role-name{font-size:14px;font-weight:800}
+.role-firms{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
+.score{font-size:19px;font-weight:900;text-align:right}.tier{font-size:10px;color:var(--muted);text-align:right}
+.track{height:6px;background:#081121;border-radius:999px;overflow:hidden;margin-top:9px}.fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:width .4s}
+.detail{position:sticky;top:70px;padding:16px}
+.detail h2{font-size:18px;margin:4px 0 8px;line-height:1.35}
+.detail .desc{font-size:12px;line-height:1.65;color:var(--muted)}
+.tag-title{margin-top:14px;margin-bottom:6px;font-size:11px;font-weight:800;color:var(--accent2)}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:10px;padding:5px 6px;border:1px solid var(--line);border-radius:7px;background:#0a1427}
+a.tag{color:#b8c8ff;text-decoration:none}
+a.tag:hover{border-color:var(--accent)}
+.metric{margin-top:8px}.metric-top{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:3px}.metric-top b{color:var(--text)}
+.meter{height:5px;background:#081121;border-radius:999px;overflow:hidden}.meter>div{height:100%;background:var(--gold);transition:width .4s}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel,.method{padding:17px}
+.method h2,.panel h2{font-size:18px;margin:0 0 10px}
+.formula{font-size:12px;color:var(--muted);padding:12px;border:1px solid var(--line);border-radius:11px;background:#0b1425;line-height:1.75}
+.wgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.wg{padding:10px;border:1px solid var(--line);border-radius:10px;background:#0b1425}.wg b{display:flex;justify-content:space-between;font-size:12px}.wg span{display:block;font-size:10px;color:var(--muted);line-height:1.45;margin-top:4px}
+.timeline{display:flex;align-items:flex-end;gap:9px;min-height:240px;padding:18px 8px 0}
+.stage{flex:1;min-width:0;text-align:center}.stagebar{border-radius:10px 10px 3px 3px;background:linear-gradient(180deg,var(--accent),#4e67b6);min-height:30px}.stage .v{font-weight:900;margin-top:6px}.stage .t{font-size:10px;color:var(--muted);line-height:1.35;margin-top:3px}
+.delta{color:var(--accent2);font-size:11px;font-weight:800}
+.livebar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;margin-bottom:12px;flex-wrap:wrap}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--good);display:inline-block;margin-right:6px;box-shadow:0 0 0 0 rgba(120,210,157,.7);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(120,210,157,.7)}70%{box-shadow:0 0 0 9px rgba(120,210,157,0)}100%{box-shadow:0 0 0 0 rgba(120,210,157,0)}}
+.livegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.livecard{padding:13px}
+.livecard .l{font-size:11px;color:var(--muted)}
+.livecard .v{font-size:23px;font-weight:900;margin-top:3px}
+.livecard .v small{font-size:11px;color:var(--muted);font-weight:600}
+.livecard .s{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4}
+.up{color:var(--good)}.down{color:var(--bad)}
+.spark{width:100%;height:42px;margin-top:8px}
+.board-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}
+.board{padding:13px}
+.board h3{margin:0 0 9px;font-size:13px}
+.board table{width:100%;border-collapse:collapse}
+.board td{padding:7px 4px;font-size:12px;border-bottom:1px solid rgba(37,54,83,.5)}
+.board td:last-child{text-align:right;font-weight:800}
+.board a{color:var(--text);text-decoration:none}
+.board a:hover{color:var(--accent2)}
+.apirow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 14px}
+.apirow code{background:#0a1426;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:11px;color:#b8c8ff;word-break:break-all}
+.company-toolbar{display:grid;grid-template-columns:1fr auto;gap:9px;padding:13px;margin-bottom:11px}
+.search{width:100%;background:#0a1426;border:1px solid var(--line);border-radius:10px;color:#fff;padding:12px;font-size:16px}
+.company-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.company{padding:13px;cursor:pointer}.company:hover{border-color:#40577d}
+.company .sector{font-size:10px;color:var(--accent2);font-weight:800}.company .name{font-size:14px;font-weight:900;margin-top:3px}
+.company .back{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px}.company .fact{font-size:11px;color:#c9d4e8;line-height:1.55;margin-top:8px;min-height:50px}
+.cnums{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:10px}.cn{background:#091325;border:1px solid var(--line);border-radius:8px;padding:6px;text-align:center}.cn b{display:block;font-size:13px}.cn span{font-size:9px;color:var(--muted)}
+.compare{padding:15px;margin-top:12px}.compare-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}.cmpchip{font-size:11px;padding:7px;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:11px}table.data{border-collapse:collapse;width:100%;min-width:800px}th,td{padding:10px 11px;font-size:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{position:sticky;top:0;background:#0b1628;color:#dce5f8}td{color:var(--muted)}td b{color:var(--text)}
+.personal-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:14px}
+.strengths{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.strength{padding:10px;border:1px solid var(--line);border-radius:10px;background:#0b1425}.strength b{font-size:12px}.strength div{font-size:10px;color:var(--muted);line-height:1.5;margin-top:4px}
+.targets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.target{padding:11px;border:1px solid var(--line);border-radius:11px;background:#0b1425}.target-head{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:800}.target p{font-size:10px;color:var(--muted);line-height:1.55;margin:6px 0 0}
+.steps{display:grid;gap:9px;margin-top:10px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:11px;border:1px solid var(--line);border-radius:11px;background:#0b1425}
+.step .n{width:26px;height:26px;border-radius:8px;background:rgba(123,156,255,.15);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
+.step b{font-size:12px}.step p{margin:4px 0 0;font-size:11px;color:var(--muted);line-height:1.55}
+.matrix-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}.cell{padding:9px 7px;border-radius:8px;border:1px solid var(--line);font-size:10px;line-height:1.35;min-height:68px}.cell b{display:block;font-size:11px;margin-bottom:3px}
+.vs{padding:17px}
+.vs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.vs-card{padding:12px;border:1px solid var(--line);border-radius:12px;background:#0b1425}
+.vs-card h4{margin:0;font-size:13px}.vs-card .vs-num{font-size:26px;font-weight:900;margin:6px 0 2px}
+.vs-card p{font-size:10.5px;color:var(--muted);line-height:1.55;margin:6px 0 0}
+.sources{padding:18px}.sources h2{font-size:17px;margin:0 0 8px}.sources p,.sources li{font-size:11px;color:var(--muted);line-height:1.7}.sources a{color:#b8c8ff}
+.footer{text-align:center;color:#66758f;font-size:10px;padding:18px 0 5px;line-height:1.8}
+@media(max-width:1000px){
+ .hero,.grid-main,.personal-grid,.two,.board-grid{grid-template-columns:1fr}.detail{position:static}.company-grid{grid-template-columns:repeat(2,1fr)}.summary-grid{grid-template-columns:repeat(2,1fr)}.livegrid{grid-template-columns:repeat(2,1fr)}.vs-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ .shell{padding:11px}.hero-main{padding:17px}.profile{padding:14px}.company-grid,.targets,.strengths,.wgrid{grid-template-columns:1fr}.company-toolbar{grid-template-columns:1fr}.summary-grid{grid-template-columns:1fr 1fr}.livegrid{grid-template-columns:1fr 1fr}.matrix-grid{grid-template-columns:1fr 1fr}.weight-grid{grid-template-columns:1fr 1fr}.nav{top:3px;padding:6px}.nav button{font-size:11px;padding:8px 9px}.role-row{grid-template-columns:31px minmax(0,1fr) auto}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="hero">
+    <div class="card hero-main">
+      <div class="kicker">FINANCE CAREER CAPITAL INDEX · LIVE · V2.0</div>
+      <h1>财经求职含金量指数<br>综合实时版</h1>
+      <p>本版只保留<b style="color:#fff">一个综合口径</b>：把平台实力、岗位实质、入职门槛、市场认可、退出迁移、稀缺上限六个维度加权合成一个总分。六个维度的权重全部开放可调——拖动滑杆，排名实时重算，谁高谁低你自己说了算，而不是模型替你下结论。岗位与平台分离计分：公司大只算平台分，永远买不来岗位分。行情板块对接公开财经数据接口，每小时自动更新。</p>
+    </div>
+    <div class="card profile">
+      <div>
+        <div class="small">当前履历组合（2004.10 · 2027届）</div>
+        <div class="big">东北财经大学会计 GPA 3.82 → 中审众环 → 德勤上海 TMT → 交银国信 固收</div>
+        <div class="badges">
+          <span class="badge">会计学 97 分</span><span class="badge">德勤上海 TMT/IPO</span>
+          <span class="badge">交银国信 固收</span><span class="badge">ACCA 5/13</span>
+          <span class="badge">Python / Wind / SQL</span><span class="badge">大创国家级立项</span>
+        </div>
+      </div>
+      <div style="margin-top:13px">
+        <div class="small">职业主线</div>
+        <div class="big" style="color:var(--accent2)">从会计/审计型 → 财务 + 投资研究型</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="active" data-page="dashboard">总览</button>
+    <button data-page="ranking">综合排名</button>
+    <button data-page="live">实时行情</button>
+    <button data-page="companies">公司平台库</button>
+    <button data-page="roadmap">你的发展路径</button>
+    <button data-page="method">评分规则</button>
+    <button data-page="sources">数据与来源</button>
+  </div>
+
+  <section id="dashboard" class="page active">
+    <div class="summary-grid">
+      <div class="card stat"><div class="label">当前履历组合指数</div><div class="value">82</div><div class="hint">会计底子 + 四大标签 + 交银国信固收入口。固收经历补上了投资侧证据。</div></div>
+      <div class="card stat"><div class="label">交银国信固收 · 客观行业分</div><div class="value" id="dashObj">—</div><div class="hint">按行业客观维度评估，不因你个人背景而加分。</div></div>
+      <div class="card stat"><div class="label">交银国信固收 · 对你个人增益</div><div class="value">94</div><div class="hint">补的是投资/信用/固收能力，而你此前已有审计标签——边际价值极高。</div></div>
+      <div class="card stat"><div class="label">秋招主攻方向</div><div class="value" style="font-size:20px">固收投研 / FICC / 理财子</div><div class="hint">2027届秋招窗口已开。优先增加新能力标签，不再重复纯审计。</div></div>
+    </div>
+    <div class="card callout">
+      <b>本系统最重要的原则：</b>“工行很大”“交通银行背景很强”都计分，但只计入<strong>平台实力</strong>（权重20%），不能把任何后台岗位直接抬到头部券商 FICC 或公募核心投研之上。同理，<b>国有大行分行的对公/授信岗</b>——它本质是信用分析岗，与固收信用研究同源——其岗位实质与市场认可在上一版被系统性低估，本版已上调（见评分规则页的调整说明）。你可以在综合排名页拖动权重滑杆验证：任何合理权重下，三大主流路径都落在同一档，不存在谁碾压谁。
+    </div>
+    <div class="two">
+      <div class="card panel">
+        <h2>你的履历价值变化</h2>
+        <div class="timeline">
+          <div class="stage"><div class="stagebar" style="height:95px"></div><div class="v">55</div><div class="t">本科会计<br>课程/证书基础</div></div>
+          <div class="stage"><div class="stagebar" style="height:120px"></div><div class="v">63</div><div class="t">+ 中审众环<br>审计执行经验</div><div class="delta">+8</div></div>
+          <div class="stage"><div class="stagebar" style="height:155px"></div><div class="v">74</div><div class="t">+ 德勤上海<br>四大/TMT/IPO</div><div class="delta">+11</div></div>
+          <div class="stage"><div class="stagebar" style="height:190px"></div><div class="v">82</div><div class="t">+ 交银国信<br>固定收益</div><div class="delta">+8</div></div>
+          <div class="stage"><div class="stagebar" style="height:220px;background:linear-gradient(180deg,var(--accent2),#3e8c81)"></div><div class="v">89–93</div><div class="t">下一跳：固收投研/FICC/理财子/对公授信</div><div class="delta">潜在 +7~11</div></div>
+        </div>
+      </div>
+      <div class="card panel">
+        <h2>为什么交银国信这一步对你加成明显</h2>
+        <div class="formula">
+          你已经有：<b style="color:#fff">会计成绩 + 审计底稿 + 四大品牌 + IPO/大型企业项目</b><br>
+          你原本缺：<b style="color:#fff">投资逻辑 + 信用风险 + 固定收益资产 + 买方/资管语境</b><br><br>
+          同一份实习，对别人可能只是“银行系信托经历”，对你却承担了<strong>职业标签切换</strong>的功能。模型把这种补齐能力缺口单独放进个人增益指数，而不偷偷抬高行业客观分。
+        </div>
+        <div class="matrix-grid">
+          <div class="cell"><b>平台背书</b>交通银行持股85%，银行系信托</div>
+          <div class="cell"><b>行业识别</b>固收/资管/信用方向可被金融机构理解</div>
+          <div class="cell"><b>能力补齐</b>从审计核验走向资产分析</div>
+          <div class="cell"><b>下一跳</b>公募固收、FICC、理财子、研究更顺</div>
+          <div class="cell"><b>关键风险</b>若实际工作偏运营事务，含金量需下调——主动争取投研任务</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ranking" class="page">
+    <div class="card controls">
+      <div class="control-row">
+        <span class="label">综合口径（唯一）—— 六维加权合成一个总分，拖动调整：</span>
+        <button class="btn" id="resetW" style="margin-left:auto">重置默认权重</button>
+      </div>
+      <div class="weight-grid" id="weightGrid"></div>
+    </div>
+    <div class="grid-main">
+      <div id="roleList" class="role-list"></div>
+      <aside id="detail" class="card detail"></aside>
+    </div>
+    <div class="card vs" style="margin-top:14px">
+      <h2 style="font-size:18px;margin:0 0 4px">三大主流路径对比：交银国信固收 vs 国有大行分行对公/授信 vs 四大审计</h2>
+      <p style="font-size:11px;color:var(--muted);margin:4px 0 0">按默认综合口径，三者分数差距在 4 分以内、处于同一档位。平台分三家都在 86–94 区间，真正的差距只在岗位实质——而岗位实质取决于你实际做了什么，不取决于工牌上印的是谁。</p>
+      <div class="vs-grid" id="vsGrid"></div>
+    </div>
+  </section>
+
+  <section id="live" class="page">
+    <div class="card livebar">
+      <div style="font-size:12px"><span class="pulse"></span>实时行情 · 数据源自动更新（GitHub Actions 每小时刷新 + 页面每5分钟拉取）</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span id="liveTime" style="font-size:11px;color:var(--muted)">加载中…</span>
+        <button class="btn" id="refreshLive">立即刷新</button>
+      </div>
+    </div>
+    <div id="liveError" class="card callout" style="display:none"></div>
+    <div class="livegrid" id="liveCards"></div>
+    <div class="board-grid">
+      <div class="card board"><h3>行业板块 · 实时涨幅榜 <span id="indSrc" style="font-size:10px;color:var(--muted)"></span></h3><div id="boardUp"></div></div>
+      <div class="card board"><h3>行业板块 · 实时跌幅榜</h3><div id="boardDown"></div></div>
+    </div>
+    <div class="card apirow">
+      <span style="font-size:11px;color:var(--muted)">数据接口（JSON API，可直接调用）：</span>
+      <code id="apiUrl">data/live.json</code>
+      <button class="btn" id="copyApi">复制接口地址</button>
+    </div>
+    <div class="card callout" style="margin-top:12px">
+      <b>接口与数据源：</b>行情快照由 <a class="tag" href="https://github.com/akfamily/akshare" target="_blank" rel="noopener">AkShare</a> 从公开财经接口抓取（国债收益率/指数/行业板块），由 GitHub Actions 定时任务每小时写回本站 data/live.json，网页端实时拉取渲染。原始数据源：<a class="tag" href="https://www.chinabond.com.cn" target="_blank" rel="noopener">中国债券信息网</a> <a class="tag" href="https://www.chinamoney.com.cn" target="_blank" rel="noopener">全国银行间同业拆借中心</a> <a class="tag" href="https://data.eastmoney.com/" target="_blank" rel="noopener">东方财富数据中心</a> <a class="tag" href="https://q.10jqka.com.cn/" target="_blank" rel="noopener">同花顺行情中心</a> <a class="tag" href="https://home.treasury.gov/" target="_blank" rel="noopener">美国财政部</a>
+    </div>
+  </section>
+
+  <section id="companies" class="page">
+    <div class="card company-toolbar">
+      <input id="search" class="search" placeholder="搜索：中信、汇丰、BlackRock、公募、信托、央企、外资……">
+      <div class="filter" style="display:flex;gap:7px">
+        <button class="btn active" data-scope="all">全部</button>
+        <button class="btn" data-scope="cn">中资</button>
+        <button class="btn" data-scope="global">国际</button>
+      </div>
+    </div>
+    <div class="card callout">
+      <b>公司平台库只回答“这个机构本身有多强”</b>：看体量、资本/股东、品牌、市场与全球网络。具体实习含金量仍必须回到部门和岗位。点击公司卡片加入对比器（最多 4 家），每张卡带官网/百科/行情外链。
+    </div>
+    <div id="companyGrid" class="company-grid"></div>
+    <div class="card compare">
+      <div style="font-size:13px;font-weight:900;margin-bottom:8px">公司横向对比器</div>
+      <div id="compareChips" class="compare-chips">点击公司卡片加入对比</div>
+      <div id="compareTable"></div>
+    </div>
+  </section>
+
+  <section id="roadmap" class="page">
+    <div class="personal-grid">
+      <div class="card panel">
+        <h2>你的能力资产（简历实证）</h2>
+        <div class="strengths">
+          <div class="strength"><b>会计/财务：90</b><div>会计学 97 分、GPA 3.82、初级会计证、ACCA 5/13——信用与估值的地基已打牢。</div></div>
+          <div class="strength"><b>审计/核验：93</b><div>德勤上海 TMT：IPO 银行函证 200+ 份准确率 98%、7 现场监盘 900+ 项、中国 500 强车企中期审阅。</div></div>
+          <div class="strength"><b>数据/自动化：86</b><div>自建 AI Agent 核对 500+ 份合同、效率 +70%；Python/Wind/SQL/Power BI——你比纯财务背景更易切入研究。</div></div>
+          <div class="strength"><b>研究/表达：82</b><div>大创国家级（63500 份简历建模）、CGMA 全英文报告、竞争模拟国家级二等奖。</div></div>
+          <div class="strength"><b>资本市场：72</b><div>正在从审计向投资补齐，交银国信是关键切换节点。</div></div>
+          <div class="strength"><b>固定收益：70→</b><div>有入口，靠实际项目把信用、债券、收益率分析坐实——教程笔记本就是为此准备。</div></div>
+        </div>
+      </div>
+      <div class="card panel">
+        <h2>下一跳匹配度 × 岗位上限 × 边际加成</h2>
+        <div id="targets" class="targets"></div>
+      </div>
+    </div>
+    <div class="two" style="margin-top:14px">
+      <div class="card panel">
+        <h2>90 天行动清单（秋招窗口）</h2>
+        <div class="steps">
+          <div class="step"><div class="n">1</div><div><b>把交银国信做实（最重要）</b><p>主动争取：1 个信用债入池/发行人分析全流程、参与投资支持材料撰写。目标：离职时简历上有一句带数字的固收成果，而不是“协助整理资料”。</p></div></div>
+          <div class="step"><div class="n">2</div><div><b>产出可展示的 Python 作品</b><p>用桌面上的《固收实习实操教程》环境，搭一个信用指标筛查脚本 + 利差周报自动化（akshare 数据 → 指标 → 图表 → Excel）。面试时演示，等于把“财务+数据+固收”三个标签同时变现。</p></div></div>
+          <div class="step"><div class="n">3</div><div><b>秋招投递组合</b><p>主攻：公募/理财子固收投研、券商固收研究、大行总行金融市场部、股份行分行对公/授信（你认为含金量高的路径，综合口径支持这个判断）。辅攻：四大 Deals/FDD（德勤背景迁移成本最低）。</p></div></div>
+          <div class="step"><div class="n">4</div><div><b>证书与英语</b><p>ACCA 推进 2 科（优先 FR 财务报告、FM 财务管理，与固收直接相关）；CFA 一级可选（资管/固收岗加分）；雅思 6.5 已够用，外企/港资方向再刷。</p></div></div>
+        </div>
+      </div>
+      <div class="card panel">
+        <h2>交银国际信托 · 岗位深析</h2>
+        <div class="formula">
+          <b style="color:#fff">平台面</b>：交通银行持股 85%，注册资本 57.65 亿元，2025 年末信托资产 7306 亿元——银行系信托中平台背书扎实，金融部门属性清晰，简历信号强于多数非金融央企子公司。<br><br>
+          <b style="color:#fff">行业面</b>：信托行业正处于“非标转标”转型期，固收/标品投资条线是全行业资源倾斜方向——你在对的时间进了对的条线。<br><br>
+          <b style="color:#fff">含金量开关</b>：实际参与信用分析、资产筛选、投资材料 = 投研经历；只做事务管理/运营 = 平台分照算、岗位分打折。这个开关掌握在你自己手里：入职第一周就主动问组长能承接什么分析任务。<br><br>
+          <b style="color:#fff">下一跳地图</b>：公募固收研究 / 理财子固收投资 / 券商 FICC 与固收研究 / 保险资管信用研究——四条路都把“银行系信托固收”视为同源经历。
+        </div>
+        <div class="matrix-grid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="cell"><b>做实投研</b>主动领信用分析任务</div>
+          <div class="cell"><b>留下作品</b>筛查模型+周报</div>
+          <div class="cell"><b>积累人证</b>让带教愿意写推荐</div>
+          <div class="cell"><b>校准故事</b>“审计→信用研究”叙事贯穿面试</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="method" class="page">
+    <div class="two">
+      <div class="card method">
+        <h2>综合口径 CI（Composite Index，唯一口径）</h2>
+        <div class="formula">
+          <b style="color:#fff">CI = w1×平台实力 + w2×岗位实质 + w3×入职门槛 + w4×市场认可 + w5×退出迁移 + w6×稀缺上限</b><br><br>
+          默认权重：平台 20 / 岗位 25 / 门槛 20 / 认可 15 / 退出 12 / 上限 8（权重和自动归一化）。排名页的滑杆可以实时改权重——这是本版取代“多口径切换”的方案：<b style="color:#fff">一个总分，权重透明可调</b>。
+        </div>
+        <div class="wgrid">
+          <div class="wg"><b><span>平台实力</span><em>默认 20%</em></b><span>机构规模/资本6；股东与制度背书5；品牌与客户资源5；国际/市场覆盖4。</span></div>
+          <div class="wg"><b><span>岗位实质</span><em>默认 25%</em></b><span>离投资/交易/决策多近8；技术深度7；真实项目暴露6；责任密度4。</span></div>
+          <div class="wg"><b><span>入职门槛</span><em>默认 20%</em></b><span>筛选强度8；面试/技能门槛6；名额稀缺6。不伪造录取率，用模型分表达。</span></div>
+          <div class="wg"><b><span>市场认可</span><em>默认 15%</em></b><span>招聘方简历信号6；跨机构认可5；专业可信度4。</span></div>
+          <div class="wg"><b><span>退出/迁移</span><em>默认 12%</em></b><span>下一跳质量7；职业路径宽度5。</span></div>
+          <div class="wg"><b><span>稀缺与上限</span><em>默认 8%</em></b><span>长期天花板4；同类岗位稀缺度4。</span></div>
+        </div>
+      </div>
+      <div class="card method">
+        <h2>个人增益指数 PGI（单独呈现，不混入 CI）</h2>
+        <div class="formula">
+          <b style="color:#fff">PGI = 能力匹配20 + 缺口补齐25 + 简历多样化20 + 下一跳杠杆20 + 可实现性15</b><br><br>
+          “对你本人价值” = CI × 80% + PGI × 20%，仅在总览页以独立卡片呈现。个人适配永远不冒充行业客观层级。
+        </div>
+        <div class="formula" style="margin-top:10px">
+          <b style="color:#fff">V2.0 相对上一版的口径调整（应你的校准反馈）</b><br>
+          ① <b style="color:#fff">国有大行分行 对公/授信</b>：岗位实质 72→80、市场认可 78→83、退出迁移 72→78、入职门槛 73→76、上限 73→77。理由：对公授信本质是信用分析岗，与固收信用研究同源；金融部门属性与国有大行平台信号在旧版被系统性低估。调整后与四大审计分差收窄至 1 分内——印证“同一档、各有所长”。<br>
+          ② 取消 7 个并列排序口径，改为单一综合分 + 可调权重。<br>
+          ③ 新增实时行情板块与全部外链，排名与公司卡可直接跳转官网/百科/行情。
+        </div>
+      </div>
+    </div>
+    <div class="card callout" style="margin-top:14px">
+      <b>公平性约束：</b>① 不把“公司很大”重复计入品牌、难度、认可度；② 平台规模只占 20%，岗位实质占 25%；③ 国际大行后台不会因集团资产巨大而自动得到前台分；④ 同一机构不同部门可相差 10–25 分；⑤ 个人适配与行业客观分分开；⑥ 无公开招聘录取率时不伪造百分比。
+    </div>
+  </section>
+
+  <section id="sources" class="page">
+    <div class="card sources">
+      <h2>个人履历依据</h2>
+      <p>按你当前简历（中文版+英文版）建模：东北财经大学会计学 2023 级、GPA 3.82/4.00（会计学 97 分）、德勤上海 TMT 审计实习（2026.07–09：500 强车企中期审阅、IPO 函证 200+ 份、7 现场监盘 900+ 项、自建 AI Agent 效率 +70%）、中审众环大连国企年审、大创国家级立项（63500 份简历数据模型）、Hanson Mole 跨境电商创业（财务全流程）、ACCA 5/13、初级会计、CET-6 522、雅思 6.5、Python/Wind/SQL/Power BI。</p>
+      <h2 style="margin-top:16px">关键机构事实校准（公开资料）</h2>
+      <ul>
+        <li>交银国际信托：交通银行持股 85%，注册资本 57.65 亿元；公司公开信息显示 2025 年末信托资产 7306 亿元。</li>
+        <li>中信证券：2025 年末资产总额约 2.082 万亿元。</li>
+        <li>华夏基金：截至 2025 年末管理资产规模超 3.2 万亿元。</li>
+        <li>BlackRock：截至 2025 年末 AUM 约 14 万亿美元。</li>
+        <li>Deloitte：FY2026 全球收入约 745 亿美元、员工接近 50 万人。</li>
+        <li>实时行情：AkShare 聚合中国债券信息网/全国银行间同业拆借中心/东方财富/同花顺/新浪财经公开接口，由 GitHub Actions 每小时刷新至本站 data/live.json。</li>
+      </ul>
+      <h2 style="margin-top:16px">评分说明</h2>
+      <p>所有 0–100 分均为求职分析模型，不是任何机构官方排名，也不是承诺的录取概率或薪资排名。公司体量事实来自公开年报/官网；“岗位认可度、选择性、退出路径”属于按岗位功能与招聘市场结构建立的分析指标。事实数据与分析评分分开呈现，权重完全开放给使用者调整。</p>
+    </div>
+  </section>
+
+  <div class="footer">财经求职含金量指数 · V2.0 综合实时版 · 2026-10 · 评分用于职业比较与路线规划，不代表官方榜单<br>数据由 GitHub Actions 每小时自动更新 · 接口 data/live.json</div>
+</div>
+
+<script>
+/* ================= 数据 ================= */
+const roles=[
+{name:"全球顶级投行 IBD / Markets",firms:["Goldman Sachs","J.P. Morgan","Morgan Stanley","BofA","Citi","UBS"],plat:98,role:99,diff:99,rec:100,exit:99,ceil:99,pgi:70,desc:"全球投行、资本市场与 Markets 核心前台。集团规模、跨境客户和产品线强，岗位本身处于高决策密度、高技能密度区域。"},
+{name:"全球顶级另类资管 / PE / Private Credit",firms:["Blackstone","KKR","Apollo","Carlyle","Bain Capital","Warburg Pincus"],plat:97,role:100,diff:100,rec:100,exit:99,ceil:100,pgi:61,desc:"顶级买方投资平台。名额极少、项目判断和交易能力要求高，长期职业上限非常高。"},
+{name:"全球头部资管 固收 / 多资产",firms:["PIMCO","BlackRock","Fidelity","Schroders","PGIM"],plat:98,role:99,diff:98,rec:99,exit:98,ceil:99,pgi:79,desc:"固定收益与机构资管的全球标杆。平台 AUM、研究体系、客户资源和产品覆盖形成极强职业资本。"},
+{name:"国内头部券商 IBD",firms:["中信证券","中金公司","中信建投","华泰联合","国泰海通","招商证券"],plat:94,role:98,diff:97,rec:98,exit:97,ceil:97,pgi:88,desc:"国内资本市场核心前台。财务核查、估值、行业判断、项目执行和资本市场规则共同构成技能壁垒。"},
+{name:"国内头部券商 FICC / 自营 / 做市",firms:["中信证券","中金公司","国泰海通","华泰证券","中信建投","申万宏源"],plat:94,role:99,diff:98,rec:97,exit:97,ceil:99,pgi:84,desc:"固定收益、外汇、衍生品、自营与做市等核心市场业务。席位稀缺、专业壁垒高。"},
+{name:"头部公募 / 保险资管 固收投研",firms:["华夏基金","易方达","南方基金","博时基金","国寿资产","泰康资产","平安资产"],plat:93,role:98,diff:97,rec:98,exit:97,ceil:98,pgi:93,desc:"信用、利率、债券研究与组合管理的标准买方核心路径。与你当前固收经历衔接最自然。"},
+{name:"国有大行总行 金融市场 / 理财子投资",firms:["工商银行总行","建设银行总行","中国银行总行","交通银行总行","工银理财","交银理财","招银理财"],plat:99,role:94,diff:95,rec:96,exit:94,ceil:95,pgi:88,desc:"超大型资产负债表、资金网络与投资平台。必须区分总行核心金融市场/理财投资与普通分支行岗位。"},
+{name:"头部券商研究所 / 固收研究",firms:["中信研究","中金研究","华泰研究","国泰海通研究","申万宏源研究","广发研究"],plat:89,role:92,diff:95,rec:95,exit:96,ceil:94,pgi:89,desc:"研究训练密度高，卖方研究的行业认可和迁移能力强。固收研究可直接连接 FICC、买方固收和理财资管。"},
+{name:"大型国家资本 / 央企产业投资",firms:["中国国新","招商局资本","国寿投资","中信资本体系","大型央企产业基金"],plat:96,role:90,diff:95,rec:94,exit:91,ceil:95,pgi:72,desc:"强股东与产业资源是明显优势。真正投资团队含金量高，集团综合管理岗不能共享投资岗分值。"},
+{name:"四大 Deals / FDD / Valuation / TAS",firms:["Deloitte Financial Advisory","PwC Deals","EY Strategy and Transactions","KPMG Deal Advisory"],plat:91,role:88,diff:90,rec:93,exit:95,ceil:90,pgi:96,desc:"交易服务、财务尽调、估值和重组。对你而言是低摩擦升级路径：已有德勤审计基础，可直接补交易标签。"},
+{name:"MBB / 顶级金融战略咨询",firms:["McKinsey","BCG","Bain","Oliver Wyman","Strategy&","EY-Parthenon"],plat:94,role:91,diff:99,rec:99,exit:98,ceil:96,pgi:76,desc:"极强品牌、客户与人才网络。筛选难度极高；Oliver Wyman 在金融服务咨询尤其有代表性。"},
+{name:"头部信托 证券投资 / 信用投资",firms:["中信信托","华润信托","平安信托","建信信托","外贸信托","五矿信托"],plat:85,role:86,diff:84,rec:84,exit:84,ceil:86,pgi:86,desc:"信托中的投资条线。与财富、事务管理、运营条线差异大，真正投资岗可形成资管职业资本。"},
+{name:"交银国际信托 固定收益 / 投资支持",firms:["交银国际信托"],plat:86,role:85,diff:84,rec:86,exit:87,ceil:86,pgi:94,target:true,links:["https://www.bocomtrust.com","https://baike.baidu.com/item/交银国际信托"],desc:"你的当前岗位。平台有交通银行控股背景，2025 年末信托资产 7306 亿元。若实际参与信用分析、资产筛选、投资材料和组合支持，含金量明显高于普通信托运营。"},
+{name:"大型商业银行 总行公司金融 / 投行条线",firms:["工商银行","建设银行","中国银行","招商银行","交通银行","中信银行"],plat:97,role:82,diff:87,rec:89,exit:83,ceil:85,pgi:79,desc:"平台体量很大，企业客户和融资能力强。职业价值受总部/分行、产品岗/客户岗差异影响明显。"},
+{name:"四大审计",firms:["Deloitte","PwC","EY","KPMG"],plat:92,role:72,diff:82,rec:90,exit:85,ceil:79,pgi:61,desc:"品牌、财务基础与项目纪律很强，但属于审计专业线。你已有德勤后，继续重复纯审计的边际增益明显下降。"},
+{name:"国有大行分行 对公 / 授信",firms:["工行分行","建行分行","中行分行","农行分行","交行分行","招行分行","兴业分行"],plat:94,role:80,diff:76,rec:83,exit:78,ceil:77,pgi:72,links:["https://www.icbc.com.cn","https://www.ccb.com/cn/home/indexv3.html"],desc:"V2.0 上调项：对公授信本质是信用分析岗——读财报、评还款能力、做贷后管理，与固收信用研究同源；国有大行平台信号与金融部门属性在旧版被低估。综合口径下与四大审计同档，做授信满 2–3 年后可向总行金融市场、理财子、券商信评迁移。"},
+{name:"头部内资会计所审计",firms:["立信","天健","容诚","大华","致同"],plat:77,role:67,diff:70,rec:75,exit:72,ceil:68,pgi:47,desc:"适合建立审计和会计基本功；但你已有中审众环和德勤，再继续该类经历的简历增量很低。"},
+{name:"大型企业 战略财务 / FP&A / Treasury",firms:["大型央企财务公司","头部科技/制造企业集团财务","跨国公司 Treasury"],plat:82,role:75,diff:75,rec:78,exit:74,ceil:78,pgi:69,desc:"企业端高质量财务岗可以形成经营理解、资金和预算能力，但资本市场直接性通常低于投资/投行。"},
+{name:"信托财富 / 产品 / 事务管理",firms:["中信信托","平安信托","交银国信","华润信托等非投资条线"],plat:82,role:58,diff:62,rec:65,exit:60,ceil:63,pgi:50,desc:"公司名可能很好，但岗位与投资核心条线差距明显，需看实际是否参与资产分析与投资决策。"},
+{name:"大型银行 运营 / 中后台支持",firms:["国有大行","股份行","HSBC/Citi 等运营条线"],plat:95,role:47,diff:58,rec:61,exit:54,ceil:57,pgi:43,desc:"最能说明平台与岗位必须分离：即使身处全球巨型金融集团，普通后台岗位也不会自动获得前台的职业资本。"}
+];
+const DIMS=[["plat","平台实力","机构规模/股东/品牌/网络"],["role","岗位实质","离投资交易决策的距离与技能密度"],["diff","入职门槛","筛选强度/技能门槛/名额稀缺"],["rec","市场认可","招聘方简历信号/跨机构认可"],["exit","退出迁移","下一跳质量与路径宽度"],["ceil","稀缺上限","长期天花板与岗位稀缺度"]];
+const DEF_W={plat:20,role:25,diff:20,rec:15,exit:12,ceil:8};
+let W={...DEF_W};
+
+const companies=[
+{n:"J.P. Morgan",r:"global",s:"全球综合银行/投行",back:"全球系统重要性银行；投行与资管一体化",fact:"2025 年末总资产约 4.425 万亿美元。",scale:100,brand:100,network:100,barrier:99},
+{n:"HSBC 汇丰",r:"global",s:"全球综合银行",back:"全球银行集团，亚洲网络深",fact:"约 3 万亿美元级资产体量；亚洲客户与跨境网络是核心资源。",scale:99,brand:96,network:100,barrier:92},
+{n:"Goldman Sachs",r:"global",s:"全球投行/资管",back:"独立全球投行与资管平台",fact:"投行、Markets、Asset & Wealth Management 均为核心业务；前台选择性极高。",scale:95,brand:100,network:100,barrier:100},
+{n:"Morgan Stanley",r:"global",s:"全球投行/财富管理",back:"全球投行、Markets 与财富管理集团",fact:"全球资本市场与财富管理网络强，前台与后台岗位需分开评价。",scale:95,brand:99,network:100,barrier:99},
+{n:"BlackRock",r:"global",s:"全球资产管理",back:"全球最大级别资产管理平台",fact:"截至 2025 年末 AUM 约 14 万亿美元。",scale:100,brand:100,network:100,barrier:99},
+{n:"PIMCO",r:"global",s:"全球固定收益资管",back:"Allianz 体系；主动固收标杆",fact:"全球固定收益求职代表性平台，研究与组合管理壁垒极高。",scale:96,brand:100,network:100,barrier:100},
+{n:"Blackstone",r:"global",s:"全球另类资管",back:"PE/Credit/Real Estate/Infra",fact:"投资岗席位稀缺，全球项目与资本网络广。",scale:97,brand:100,network:100,barrier:100},
+{n:"KKR",r:"global",s:"全球另类资管",back:"PE/Credit/Real Assets 综合平台",fact:"全球项目网络广，投资岗选择性极高。",scale:94,brand:99,network:100,barrier:100},
+{n:"Deloitte 德勤",r:"global",s:"四大专业服务",back:"全球专业服务网络",fact:"FY2026 全球收入约 745 亿美元、近 50 万员工；你已有上海 TMT 审计经历。",scale:95,brand:96,network:100,barrier:83},
+{n:"PwC 普华永道",r:"global",s:"四大专业服务",back:"全球专业服务网络",fact:"审计、Deals、咨询业务线差异大，应按具体团队评估。",scale:94,brand:96,network:100,barrier:83},
+{n:"EY 安永",r:"global",s:"四大专业服务",back:"全球专业服务网络",fact:"EY-Parthenon / SaT 可作为审计向交易与战略升级路径。",scale:93,brand:95,network:100,barrier:84},
+{n:"KPMG 毕马威",r:"global",s:"四大专业服务",back:"全球专业服务网络",fact:"Deal Advisory 与审计岗位在技能与退出方向上有明显区别。",scale:90,brand:94,network:100,barrier:82},
+{n:"McKinsey",r:"global",s:"顶级战略咨询",back:"全球战略咨询头部品牌",fact:"平台价值来自全球客户、人才密度、项目训练和校友网络。",scale:88,brand:100,network:100,barrier:100},
+{n:"BCG",r:"global",s:"顶级战略咨询",back:"全球战略咨询头部品牌",fact:"MBB 之一；强品牌与退出路径。",scale:88,brand:100,network:100,barrier:100},
+{n:"Bain",r:"global",s:"顶级战略咨询",back:"全球战略咨询头部品牌",fact:"在 PE 商业尽调和战略项目中辨识度高。",scale:86,brand:100,network:100,barrier:100},
+{n:"Oliver Wyman",r:"global",s:"金融/战略咨询",back:"Marsh McLennan 旗下",fact:"银行、保险、风险与金融服务咨询领域代表性强。",scale:85,brand:96,network:98,barrier:96},
+{n:"中信证券",r:"cn",s:"头部综合券商",back:"中信金控/中信集团体系",fact:"2025 年末资产总额约 2.082 万亿元；IBD、FICC、研究、资管均为核心。",scale:96,brand:99,network:87,barrier:98},
+{n:"中金公司 CICC",r:"cn",s:"头部投行/券商",back:"中央汇金为重要股东",fact:"国内投行、研究、机构业务求职中的头部平台。",scale:90,brand:100,network:95,barrier:99},
+{n:"中信建投",r:"cn",s:"头部券商/投行",back:"大型国有金融股东背景",fact:"投行与债券承销具有较强市场辨识度。",scale:89,brand:96,network:76,barrier:97},
+{n:"国泰海通",r:"cn",s:"头部综合券商",back:"大型国有综合证券平台",fact:"合并后平台体量大，投行、FICC、机构与财富业务覆盖完整。",scale:95,brand:97,network:82,barrier:96},
+{n:"华泰证券/华泰联合",r:"cn",s:"头部综合券商/投行",back:"大型国有券商体系",fact:"华泰联合投行、华泰交易与机构业务均具辨识度。",scale:93,brand:97,network:86,barrier:96},
+{n:"招商证券",r:"cn",s:"大型综合券商",back:"招商局体系",fact:"股东资源和集团协同构成加成。",scale:89,brand:92,network:78,barrier:90},
+{n:"工商银行",r:"cn",s:"国有大型商业银行",back:"中央金融企业/国有大行",fact:"超大型资产负债表；总行金融市场/理财投资与普通运营岗必须区分。",scale:100,brand:98,network:96,barrier:89},
+{n:"建设银行",r:"cn",s:"国有大型商业银行",back:"中央金融企业/国有大行",fact:"超大型资产负债表与广泛机构客户资源。",scale:100,brand:97,network:94,barrier:89},
+{n:"中国银行",r:"cn",s:"国有大型商业银行",back:"中央金融企业/国有大行",fact:"跨境与全球化网络相对突出，金融市场岗位平台属性强。",scale:100,brand:97,network:98,barrier:90},
+{n:"交通银行",r:"cn",s:"国有大型商业银行",back:"国有大行；银行/信托/基金/理财集团资源",fact:"对交银国信而言，集团资源和银行系背景是平台加成的重要来源。",scale:97,brand:94,network:88,barrier:88},
+{n:"招商银行",r:"cn",s:"头部股份制银行",back:"招商局体系",fact:"财富管理、公司金融、金融市场及招银理财均具较高辨识度。",scale:94,brand:97,network:87,barrier:92},
+{n:"交银国际信托",r:"cn",s:"银行系信托/资管",back:"交通银行持股 85%，湖北交投体系 15%",fact:"注册资本 57.65 亿元；2025 年末信托资产 7306 亿元。",scale:84,brand:86,network:69,barrier:84,target:true},
+{n:"中信信托",r:"cn",s:"头部信托",back:"中信集团体系",fact:"综合信托平台；投资、财富和事务管理岗位需分开看。",scale:88,brand:91,network:75,barrier:86},
+{n:"华润信托",r:"cn",s:"头部信托",back:"华润集团体系",fact:"证券投资、阳光私募服务领域辨识度较高。",scale:86,brand:88,network:72,barrier:84},
+{n:"平安信托",r:"cn",s:"头部信托",back:"中国平安集团体系",fact:"集团金融生态与客户网络提供平台资源。",scale:87,brand:90,network:78,barrier:85},
+{n:"华夏基金",r:"cn",s:"头部公募基金",back:"大型公募资管平台",fact:"截至 2025 年末管理资产规模超 3.2 万亿元。",scale:96,brand:98,network:81,barrier:97},
+{n:"易方达基金",r:"cn",s:"头部公募基金",back:"中国头部基金管理人",fact:"公募投研核心平台，权益与固收辨识度均很高。",scale:96,brand:99,network:80,barrier:98},
+{n:"招商基金",r:"cn",s:"头部公募基金",back:"招商体系及合资背景",fact:"截至 2025 年末总资产管理规模超 1.59 万亿元。",scale:92,brand:93,network:77,barrier:94},
+{n:"国寿资产",r:"cn",s:"保险资管",back:"中国人寿集团体系",fact:"大型长期资金投资平台，固收与多资产配置价值强。",scale:96,brand:95,network:76,barrier:96},
+{n:"泰康资产",r:"cn",s:"保险资管",back:"泰康保险集团体系",fact:"保险资金管理与长期投资平台，固收、信用、多资产方向较强。",scale:92,brand:93,network:73,barrier:94}
+];
+const targets=[
+{name:"公募 / 保险资管 固收投研",match:93,ceiling:98,boost:17,why:"当前固收经历直接衔接，且能把会计审计转化成信用研究优势。"},
+{name:"四大 Deals / FDD / Valuation",match:92,ceiling:90,boost:13,why:"已有德勤审计，迁移成本最低；能立刻增加交易、尽调、估值标签。"},
+{name:"国有大行/股份行 分行对公·授信",match:88,ceiling:83,boost:9,why:"你判断其含金量高——综合口径支持：信用分析能力与金融平台信号都强，且对会计背景友好。"},
+{name:"券商固收研究",match:89,ceiling:94,boost:15,why:"信用分析与财务基础匹配，需补宏观、利率、债券定价与研究写作。"},
+{name:"大行总行金融市场 / 理财子",match:88,ceiling:95,boost:14,why:"平台大、固收资产规模强，与你当前路径兼容。"},
+{name:"头部券商 IBD",match:84,ceiling:97,boost:16,why:"会计+德勤+IPO 核验能力很适合，需补估值、交易和行业研究。"},
+{name:"券商 FICC / 自营",match:80,ceiling:99,boost:18,why:"上限高，但需显著补交易、利率、衍生品与市场微观结构。"},
+{name:"MBB / Oliver Wyman",match:73,ceiling:96,boost:14,why:"英语、成绩与表达有基础，但 case 能力与咨询项目证据仍需建立。"},
+{name:"顶级 PE / Private Credit",match:64,ceiling:100,boost:19,why:"长期上限最高之一，但对交易经验、行业判断和模型能力要求更高。"},
+{name:"继续纯审计",match:98,ceiling:79,boost:3,why:"最容易延续，但你已有德勤，继续重复审计对简历维度的边际增量最低。"}
+];
+const VS=[
+{t:"交银国际信托 固收",s:86,f:"对你 PGI 94：职业标签切换器。平台 86 + 岗位 85 + 固收条线正处行业转型风口。",c:"var(--accent2)"},
+{t:"国有大行分行 对公/授信",s:82,f:"平台 94 最高、岗位实质 80（信用分析岗）。做实授信后向总行/信评迁移路径清晰。",c:"var(--gold)"},
+{t:"四大审计",s:83,f:"平台 92、品牌认可 90，但岗位实质 72。你已有德勤标签，重复的边际价值最低。",c:"var(--accent)"}
+];
+
+/* ================= 综合排名（单一口径 + 可调权重） ================= */
+function sumW(){return Object.values(W).reduce((a,b)=>a+b,0)||1}
+function sc(r){let t=0;for(const[d]of DIMS)t+=W[d]*(r[d]||0);return Math.round(t/sumW()*10)/10}
+function tier(v){return v>=96?"S+":v>=93?"S":v>=89?"A+":v>=84?"A":v>=78?"B+":v>=70?"B":"C"}
+function metric(l,v){return `<div class="metric"><div class="metric-top"><span>${l}</span><b>${v}</b></div><div class="meter"><div style="width:${v}%"></div></div></div>`}
+let selected="交银国际信托 固定收益 / 投资支持";
+
+function renderWeights(){
+ const g=document.getElementById("weightGrid");g.innerHTML="";
+ DIMS.forEach(([d,label,hint])=>{
+  const el=document.createElement("div");el.className="weight";
+  el.innerHTML=`<b><span>${label}</span><em>${Math.round(W[d]/sumW()*100)}%</em></b><input type="range" min="0" max="30" step="1" value="${W[d]}" data-d="${d}"><span>${hint}</span>`;
+  el.querySelector("input").oninput=e=>{W[d]=+e.target.value;renderWeights();renderRoles();renderDetail(roles.find(r=>r.name===selected));renderVS()};
+  g.appendChild(el);
+ });
+}
+function renderRoles(){
+ const arr=[...roles].sort((a,b)=>sc(b)-sc(a));
+ const box=document.getElementById("roleList");box.innerHTML="";
+ arr.forEach((r,i)=>{
+  const s=sc(r),el=document.createElement("div");
+  el.className="role"+(r.name===selected?" selected":"");
+  el.innerHTML=`<div class="role-row"><div class="rank">${i+1}</div><div><div class="role-name">${r.name}${r.target?' <span class="tag" style="border-color:var(--accent)">你的岗位</span>':''}</div><div class="role-firms">${r.firms.slice(0,6).join(" · ")}</div></div><div><div class="score">${s}</div><div class="tier">${tier(s)}档</div></div></div><div class="track"><div class="fill" style="width:${s}%"></div></div>`;
+  el.onclick=()=>{selected=r.name;renderRoles();renderDetail(r)};
+  box.appendChild(el);
+ });
+ const t=roles.find(r=>r.target);document.getElementById("dashObj").textContent=sc(t);
+}
+function renderDetail(r){
+ const s=sc(r);
+ const links=r.links?r.links.map(u=>`<a class="tag" href="${u}" target="_blank" rel="noopener">${new URL(u).hostname.replace("www.","")}</a>`).join(""):"";
+ const q=encodeURIComponent(r.name+" 实习 招聘");
+ document.getElementById("detail").innerHTML=`<div class="kicker">ROLE ANALYSIS · CI ${s} / ${tier(s)}档</div><h2>${r.name}</h2><div class="desc">${r.desc}</div>
+ <div class="tag-title">代表机构</div><div class="tags">${r.firms.map(x=>`<span class="tag">${x}</span>`).join("")}</div>
+ <div class="tag-title">六维得分</div>
+ ${DIMS.map(([d,l])=>metric(l,r[d])).join("")}
+ <div class="tag-title">对你个人增益 PGI</div>${metric("PGI",r.pgi)}
+ <div class="tag-title">延伸链接</div><div class="tags">${links}<a class="tag" href="https://www.bing.com/search?q=${q}" target="_blank" rel="noopener">实习招聘搜索</a><a class="tag" href="https://baike.baidu.com/item/${encodeURIComponent(r.firms[0]||r.name)}" target="_blank" rel="noopener">百科</a></div>`;
+}
+function renderVS(){
+ const names=["交银国际信托 固定收益 / 投资支持","国有大行分行 对公 / 授信","四大审计"];
+ document.getElementById("vsGrid").innerHTML=names.map((n,i)=>`<div class="vs-card"><h4>${VS[i].t}</h4><div class="vs-num" style="color:${VS[i].c}"></div><p>${VS[i].f}</p></div>`).join("");
+ const cards=document.querySelectorAll("#vsGrid .vs-card");
+ names.forEach((n,i)=>{
+  const r=roles.find(x=>x.name===n);if(!r||!cards[i])return;
+  cards[i].querySelector(".vs-num").innerHTML=`${sc(r)}<span style="font-size:11px;color:var(--muted)"> CI · ${tier(sc(r))}档</span>`;
+ });
+}
+
+/* ================= 实时行情 ================= */
+function spark(hist,w=300,h=42){
+ if(!hist||hist.length<2)return"";
+ const vals=hist.map(p=>p[1]),min=Math.min(...vals),max=Math.max(...vals),rng=(max-min)||1;
+ const pts=hist.map((p,i)=>`${(i/(hist.length-1)*w).toFixed(1)},${(h-4-(p[1]-min)/rng*(h-8)).toFixed(1)}`).join(" ");
+ const last=vals[vals.length-1],first=vals[0],up=last>=first;
+ return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="${up?"#78d29d":"#ef8aa5"}" stroke-width="2"/></svg>`;
+}
+function fmt(v,d=2){return v==null?"—":v.toFixed(d)}
+function renderLive(d){
+ document.getElementById("liveTime").textContent="数据时间："+(d.updated_at||"—")+"（北京时间）";
+ const err=document.getElementById("liveError");
+ if(d.errors&&Object.keys(d.errors).length){err.style.display="block";err.innerHTML=`<b>部分数据源本次未取到</b>（网络波动或接口调整），下一轮自动更新会重试；其余板块正常渲染。`}
+ const t=d.treasury,cards=[];
+ if(t){
+  cards.push({l:"中国 10 年期国债收益率",v:fmt(t.cn10)+"<small> %</small>",s:`更新日期 ${t.date} · 利率债定价之锚`,spark:t.cn10_hist});
+  cards.push({l:"10Y − 2Y 期限利差",v:fmt(t.spread_10y2y)+"<small> pct</small>",s:"走阔=预期经济回暖；收窄/倒挂=防衰退信号"});
+  cards.push({l:"中国 2 年期国债收益率",v:fmt(t.cn2)+"<small> %</small>",s:"短端资金利率参照"});
+  cards.push({l:"美国 10 年期国债收益率",v:fmt(t.us10)+"<small> %</small>",s:"中美利差 = 中债10Y − 美债10Y ≈ "+(t.cn10!=null&&t.us10!=null?fmt(t.cn10-t.us10):"—")+" pct"});
+ }
+ (d.indices&&d.indices.items||[]).slice(0,4).forEach(i=>{
+  cards.push({l:i.name,v:fmt(i.price),s:`<span class="${i.chg>=0?"up":"down"}">${i.chg>=0?"▲":"▼"} ${fmt(Math.abs(i.chg))}%</span> · 源：${d.indices.src}`});
+ });
+ document.getElementById("liveCards").innerHTML=cards.map(c=>`<div class="card livecard"><div class="l">${c.l}</div><div class="v">${c.v}</div><div class="s">${c.s}</div>${c.spark?spark(c.spark):""}</div>`).join("");
+ const ind=d.industries;
+ document.getElementById("indSrc").textContent=ind?("· 源："+ind.src):"";
+ const row=x=>{const href=x.code?`https://quote.eastmoney.com/bk/${x.code}.html`:`https://www.bing.com/search?q=${encodeURIComponent("A股 "+x.name+" 板块 行情")}`;return `<tr><td><a href="${href}" target="_blank" rel="noopener">${x.name}</a></td><td class="${x.chg>=0?"up":"down"}">${x.chg>=0?"+":""}${fmt(x.chg)}%</td></tr>`};
+ const emptyRow="<p style='font-size:11px;color:var(--muted);margin:0'>本轮快照未取到行业板块数据，等待下一次自动更新。</p>";
+ document.getElementById("boardUp").innerHTML=ind&&(ind.up||[]).length?`<table>${ind.up.map(row).join("")}</table>`:emptyRow;
+ document.getElementById("boardDown").innerHTML=ind&&(ind.down||[]).length?`<table>${ind.down.map(row).join("")}</table>`:emptyRow;
+}
+async function loadLive(){
+ try{
+  const r=await fetch("data/live.json?_="+Date.now(),{cache:"no-store"});
+  renderLive(await r.json());
+ }catch(e){
+  document.getElementById("liveError").style.display="block";
+  document.getElementById("liveError").innerHTML="<b>实时数据暂时拉取失败</b>——部署到 GitHub Pages 后会自动恢复；排名板块不受影响。";
+ }
+}
+document.getElementById("refreshLive").onclick=loadLive;
+setInterval(loadLive,5*60*1000);
+document.getElementById("copyApi").onclick=()=>{
+ const url=new URL("data/live.json",location.href).href;
+ navigator.clipboard&&navigator.clipboard.writeText(url);
+ document.getElementById("apiUrl").textContent=url;
+};
+
+/* ================= 公司平台库 ================= */
+let scope="all",compares=[];
+function renderCompanies(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const arr=companies.filter(c=>(scope==="all"||c.r===scope)&&([c.n,c.s,c.back,c.fact].join(" ").toLowerCase().includes(q)));
+ const box=document.getElementById("companyGrid");box.innerHTML="";
+ arr.forEach(c=>{
+  const p=Math.round(c.scale*.35+c.brand*.30+c.network*.20+c.barrier*.15);
+  const el=document.createElement("div");el.className="card company";
+  const search=encodeURIComponent(c.n);
+  el.innerHTML=`<div class="sector">${c.r==="cn"?"中资 / 中国":"国际 / 外资"} · ${c.s}</div><div class="name">${c.n}${c.target?' <span class="tag" style="border-color:var(--accent)">你的平台</span>':''}</div><div class="back">${c.back}</div><div class="fact">${c.fact}</div><div class="cnums"><div class="cn"><b>${p}</b><span>平台指数</span></div><div class="cn"><b>${c.scale}</b><span>规模</span></div><div class="cn"><b>${c.brand}</b><span>品牌</span></div><div class="cn"><b>${c.barrier}</b><span>门槛</span></div></div><div class="tags" style="margin-top:9px"><a class="tag" href="https://www.bing.com/search?q=${search}+官网" target="_blank" rel="noopener">官网</a><a class="tag" href="https://baike.baidu.com/item/${search}" target="_blank" rel="noopener">百科</a><a class="tag" href="https://so.eastmoney.com/web/s?keyword=${search}" target="_blank" rel="noopener">行情资讯</a></div>`;
+  el.onclick=e=>{if(e.target.closest("a"))return;toggleCompare(c.n)};
+  box.appendChild(el);
+ });
+}
+function toggleCompare(n){
+ if(compares.includes(n))compares=compares.filter(x=>x!==n);
+ else if(compares.length<4)compares.push(n);else{alert("最多同时对比4家");return}
+ renderCompare();
+}
+function renderCompare(){
+ const chips=document.getElementById("compareChips"),tb=document.getElementById("compareTable");
+ if(!compares.length){chips.textContent="点击公司卡片加入对比";tb.innerHTML="";return}
+ chips.innerHTML=compares.map(n=>`<span class="cmpchip">${n} ×</span>`).join("");
+ [...chips.children].forEach((x,i)=>x.onclick=()=>{compares.splice(i,1);renderCompare()});
+ const cs=compares.map(n=>companies.find(c=>c.n===n));
+ const rows=[["机构类型",c=>c.s],["股东/平台背景",c=>c.back],["公开事实",c=>c.fact],["规模分",c=>c.scale],["品牌分",c=>c.brand],["网络/全球化",c=>c.network],["平台进入门槛",c=>c.barrier]];
+ tb.innerHTML=`<div class="tablewrap"><table class="data"><thead><tr><th>维度</th>${cs.map(c=>`<th>${c.n}</th>`).join("")}</tr></thead><tbody>${rows.map(([k,f])=>`<tr><td><b>${k}</b></td>${cs.map(c=>`<td>${f(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+function renderTargets(){
+ document.getElementById("targets").innerHTML=[...targets].sort((a,b)=>b.match-a.match).map(t=>`<div class="target"><div class="target-head"><span>${t.name}</span><span style="color:var(--accent2)">匹配 ${t.match}</span></div><div class="track"><div class="fill" style="width:${t.match}%"></div></div><p>${t.why}</p><div style="display:flex;justify-content:space-between;margin-top:7px;font-size:10px;color:var(--muted)"><span>岗位上限 ${t.ceiling}</span><span class="delta">对你边际加成 +${t.boost}</span></div></div>`).join("");
+}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(b.dataset.page).classList.add("active")});
+document.querySelectorAll(".filter .btn").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filter .btn").forEach(x=>x.classList.remove("active"));b.classList.add("active");scope=b.dataset.scope;renderCompanies()});
+document.getElementById("search").addEventListener("input",renderCompanies);
+document.getElementById("resetW").onclick=()=>{W={...DEF_W};renderWeights();renderRoles();renderDetail(roles.find(r=>r.name===selected));renderVS()};
+renderWeights();renderRoles();renderDetail(roles.find(r=>r.target));renderVS();renderCompanies();renderCompare();renderTargets();loadLive();
+</script>
+</body>
+</html>
