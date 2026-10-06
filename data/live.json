@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-06 23:36:48",
+ "updated_at": "2026-10-07 04:42:36",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-09-30",
@@ -761,76 +761,8 @@
    }
   ]
  },
- "industries": {
-  "src": "同花顺",
-  "up": [
-   {
-    "name": "生物制品",
-    "code": "",
-    "chg": 4.63
-   },
-   {
-    "name": "医疗服务",
-    "code": "",
-    "chg": 3.11
-   },
-   {
-    "name": "白酒",
-    "code": "",
-    "chg": 2.82
-   },
-   {
-    "name": "种植业与林业",
-    "code": "",
-    "chg": 2.43
-   },
-   {
-    "name": "化学制药",
-    "code": "",
-    "chg": 2.11
-   },
-   {
-    "name": "饮料制造",
-    "code": "",
-    "chg": 1.91
-   },
-   {
-    "name": "机场航运",
-    "code": "",
-    "chg": 1.76
-   },
-   {
-    "name": "汽车整车",
-    "code": "",
-    "chg": 1.57
-   }
-  ],
-  "down": [
-   {
-    "name": "元件",
-    "code": "",
-    "chg": -4.03
-   },
-   {
-    "name": "通信服务",
-    "code": "",
-    "chg": -3.44
-   },
-   {
-    "name": "半导体",
-    "code": "",
-    "chg": -2.92
-   },
-   {
-    "name": "电子化学品",
-    "code": "",
-    "chg": -2.48
-   },
-   {
-    "name": "其他电子",
-    "code": "",
-    "chg": -1.75
-   }
-  ]
+ "industries": null,
+ "errors": {
+  "industries": "(\"Connection broken: ConnectionResetError(104, 'Connection reset by peer')\", ConnectionResetError(104, 'Connection reset by peer'))"
  }
 }
