@@ -3,6 +3,9 @@
 import json
 import datetime
 import pathlib
+import argparse
+import math
+import sys
 
 import akshare as ak
 
@@ -12,7 +15,7 @@ OUT = pathlib.Path(__file__).parent / "data" / "live.json"
 def num(v, default=None):
     try:
         f = float(v)
-        return None if f != f else round(f, 4)
+        return round(f, 4) if math.isfinite(f) else None
     except (TypeError, ValueError):
         return default
 
@@ -83,7 +86,11 @@ def fetch_industries():
     return {"src": src, "up": pack(df.head(8)), "down": pack(df.tail(5)[::-1])}
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=pathlib.Path, default=OUT.with_name("live.candidate.json"))
+    args = parser.parse_args(argv)
+    failed = False
     data = {
         "updated_at": datetime.datetime.now(datetime.timezone.utc)
         .astimezone(datetime.timezone(datetime.timedelta(hours=8)))
@@ -93,14 +100,16 @@ def main():
     for key, fn in [("treasury", fetch_treasury), ("indices", fetch_indices), ("industries", fetch_industries)]:
         try:
             data[key] = fn()
-        except Exception as e:  # 单项失败不拖垮整个快照
+        except Exception as e:  # Collect all failures for diagnosis, but never report success
+            failed = True
             data[key] = None
             data.setdefault("errors", {})[key] = str(e)[:200]
-            print(f"[warn] {key} failed: {e}")
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
-    print("written", OUT, data["updated_at"])
+            print(json.dumps({"event": "fetch_error", "section": key, "level": "ERROR", "exception_type": type(e).__name__, "message": str(e)[:200]}, ensure_ascii=False))
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(data, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
+    print("written", args.output, data["updated_at"])
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
