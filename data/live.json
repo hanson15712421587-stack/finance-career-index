@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-11 21:41:24",
+ "updated_at": "2026-10-12 02:33:40",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-11",
@@ -731,35 +731,9 @@
    ]
   ]
  },
- "indices": {
-  "src": "新浪财经",
-  "items": [
-   {
-    "name": "上证指数",
-    "price": 3813.7913,
-    "chg": 0.05
-   },
-   {
-    "name": "沪深300",
-    "price": 4317.255,
-    "chg": 0.162
-   },
-   {
-    "name": "创业板指",
-    "price": 3043.335,
-    "chg": 0.22
-   },
-   {
-    "name": "深证成指",
-    "price": 12641.858,
-    "chg": 0.166
-   },
-   {
-    "name": "科创50",
-    "price": 1457.2665,
-    "chg": 0.065
-   }
-  ]
+ "indices": null,
+ "errors": {
+  "indices": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
  },
  "industries": {
   "src": "同花顺",
