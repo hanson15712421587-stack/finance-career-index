@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-12 06:37:09",
+ "updated_at": "2026-10-12 09:57:29",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-11",
@@ -736,101 +736,33 @@
   "items": [
    {
     "name": "上证指数",
-    "price": 3813.79,
-    "chg": 0.05
+    "price": 3812.42,
+    "chg": -0.04
    },
    {
     "name": "沪深300",
-    "price": 4317.25,
-    "chg": 0.16
+    "price": 4319.19,
+    "chg": 0.04
    },
    {
     "name": "创业板指",
-    "price": 3043.33,
-    "chg": 0.22
+    "price": 3022.28,
+    "chg": -0.69
    },
    {
     "name": "深证成指",
-    "price": 12641.86,
-    "chg": 0.17
+    "price": 12558.6,
+    "chg": -0.66
    },
    {
     "name": "科创50",
-    "price": 1457.27,
-    "chg": 0.07
+    "price": 1444.73,
+    "chg": -0.86
    }
   ]
  },
- "industries": {
-  "src": "同花顺",
-  "up": [
-   {
-    "name": "影视院线",
-    "code": "",
-    "chg": 7.23
-   },
-   {
-    "name": "文化传媒",
-    "code": "",
-    "chg": 5.78
-   },
-   {
-    "name": "贵金属",
-    "code": "",
-    "chg": 5.27
-   },
-   {
-    "name": "种植业与林业",
-    "code": "",
-    "chg": 4.87
-   },
-   {
-    "name": "软件开发",
-    "code": "",
-    "chg": 4.0
-   },
-   {
-    "name": "游戏",
-    "code": "",
-    "chg": 3.49
-   },
-   {
-    "name": "零售",
-    "code": "",
-    "chg": 3.13
-   },
-   {
-    "name": "IT服务",
-    "code": "",
-    "chg": 2.52
-   }
-  ],
-  "down": [
-   {
-    "name": "元件",
-    "code": "",
-    "chg": -3.63
-   },
-   {
-    "name": "风电设备",
-    "code": "",
-    "chg": -2.87
-   },
-   {
-    "name": "电子化学品",
-    "code": "",
-    "chg": -2.6
-   },
-   {
-    "name": "其他电子",
-    "code": "",
-    "chg": -1.52
-   },
-   {
-    "name": "半导体",
-    "code": "",
-    "chg": -1.27
-   }
-  ]
+ "industries": null,
+ "errors": {
+  "industries": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
  }
 }
