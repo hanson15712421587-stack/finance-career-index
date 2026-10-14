@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-14 08:47:00",
+ "updated_at": "2026-10-14 13:40:52",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-13",
@@ -732,105 +732,37 @@
   ]
  },
  "indices": {
-  "src": "新浪财经",
+  "src": "东财",
   "items": [
    {
     "name": "上证指数",
-    "price": 3800.8644,
-    "chg": 0.095
+    "price": 3779.49,
+    "chg": -0.56
    },
    {
     "name": "沪深300",
-    "price": 4275.68,
-    "chg": -0.287
+    "price": 4238.49,
+    "chg": -0.87
    },
    {
     "name": "创业板指",
-    "price": 2958.344,
-    "chg": -0.185
+    "price": 2889.31,
+    "chg": -2.33
    },
    {
     "name": "深证成指",
-    "price": 12353.699,
-    "chg": -0.252
+    "price": 12187.39,
+    "chg": -1.35
    },
    {
     "name": "科创50",
-    "price": 1427.1775,
-    "chg": 0.032
+    "price": 1400.53,
+    "chg": -1.87
    }
   ]
  },
- "industries": {
-  "src": "同花顺",
-  "up": [
-   {
-    "name": "元件",
-    "code": "",
-    "chg": 5.03
-   },
-   {
-    "name": "互联网电商",
-    "code": "",
-    "chg": 3.38
-   },
-   {
-    "name": "军工装备",
-    "code": "",
-    "chg": 3.24
-   },
-   {
-    "name": "旅游及酒店",
-    "code": "",
-    "chg": 2.55
-   },
-   {
-    "name": "零售",
-    "code": "",
-    "chg": 1.77
-   },
-   {
-    "name": "石油加工贸易",
-    "code": "",
-    "chg": 1.75
-   },
-   {
-    "name": "通信设备",
-    "code": "",
-    "chg": 1.45
-   },
-   {
-    "name": "军工电子",
-    "code": "",
-    "chg": 1.43
-   }
-  ],
-  "down": [
-   {
-    "name": "保险",
-    "code": "",
-    "chg": -3.12
-   },
-   {
-    "name": "电池",
-    "code": "",
-    "chg": -2.7
-   },
-   {
-    "name": "风电设备",
-    "code": "",
-    "chg": -2.57
-   },
-   {
-    "name": "生物制品",
-    "code": "",
-    "chg": -1.62
-   },
-   {
-    "name": "能源金属",
-    "code": "",
-    "chg": -1.41
-   }
-  ]
+ "industries": null,
+ "errors": {
+  "industries": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
  }
 }
