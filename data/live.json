@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-15 06:54:28",
+ "updated_at": "2026-10-15 09:09:05",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-14",
@@ -731,105 +731,79 @@
    ]
   ]
  },
- "indices": {
-  "src": "新浪财经",
-  "items": [
-   {
-    "name": "上证指数",
-    "price": 3767.2271,
-    "chg": -0.885
-   },
-   {
-    "name": "沪深300",
-    "price": 4217.68,
-    "chg": -1.357
-   },
-   {
-    "name": "创业板指",
-    "price": 2866.763,
-    "chg": -3.096
-   },
-   {
-    "name": "深证成指",
-    "price": 12110.591,
-    "chg": -1.968
-   },
-   {
-    "name": "科创50",
-    "price": 1380.2577,
-    "chg": -3.288
-   }
-  ]
+ "indices": null,
+ "errors": {
+  "indices": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
  },
  "industries": {
   "src": "同花顺",
   "up": [
    {
-    "name": "油气开采及服务",
+    "name": "纺织制造",
     "code": "",
-    "chg": 2.92
+    "chg": 0.0
    },
    {
-    "name": "游戏",
+    "name": "服装家纺",
     "code": "",
-    "chg": 2.62
+    "chg": 0.0
    },
    {
-    "name": "影视院线",
+    "name": "造纸",
     "code": "",
-    "chg": 1.68
+    "chg": 0.0
    },
    {
-    "name": "文化传媒",
+    "name": "包装印刷",
     "code": "",
-    "chg": 1.48
+    "chg": 0.0
    },
    {
-    "name": "煤炭开采加工",
+    "name": "家居用品",
     "code": "",
-    "chg": 1.27
+    "chg": 0.0
    },
    {
-    "name": "燃气",
+    "name": "化学制药",
     "code": "",
-    "chg": 0.93
+    "chg": 0.0
    },
    {
-    "name": "公路铁路运输",
+    "name": "中药",
     "code": "",
-    "chg": 0.84
+    "chg": 0.0
    },
    {
-    "name": "教育",
+    "name": "生物制品",
     "code": "",
-    "chg": 0.51
+    "chg": 0.0
    }
   ],
   "down": [
    {
-    "name": "风电设备",
+    "name": "白色家电",
     "code": "",
-    "chg": -5.4
+    "chg": 0.0
    },
    {
-    "name": "环保设备",
+    "name": "黑色家电",
     "code": "",
-    "chg": -3.27
+    "chg": 0.0
    },
    {
-    "name": "电池",
+    "name": "饮料制造",
     "code": "",
-    "chg": -3.09
+    "chg": 0.0
    },
    {
-    "name": "汽车整车",
+    "name": "食品加工制造",
     "code": "",
-    "chg": -3.03
+    "chg": 0.0
    },
    {
-    "name": "光伏设备",
+    "name": "纺织制造",
     "code": "",
-    "chg": -2.95
+    "chg": 0.0
    }
   ]
  }
