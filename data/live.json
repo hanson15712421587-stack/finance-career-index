@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-15 09:09:05",
+ "updated_at": "2026-10-15 14:48:29",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-14",
@@ -731,79 +731,105 @@
    ]
   ]
  },
- "indices": null,
- "errors": {
-  "indices": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+ "indices": {
+  "src": "东财",
+  "items": [
+   {
+    "name": "上证指数",
+    "price": 3707.44,
+    "chg": -1.59
+   },
+   {
+    "name": "沪深300",
+    "price": 4164.43,
+    "chg": -1.26
+   },
+   {
+    "name": "创业板指",
+    "price": 2783.3,
+    "chg": -2.91
+   },
+   {
+    "name": "深证成指",
+    "price": 11819.52,
+    "chg": -2.4
+   },
+   {
+    "name": "科创50",
+    "price": 1360.34,
+    "chg": -1.44
+   }
+  ]
  },
  "industries": {
   "src": "同花顺",
   "up": [
    {
-    "name": "纺织制造",
+    "name": "白酒",
     "code": "",
-    "chg": 0.0
+    "chg": 1.23
    },
    {
-    "name": "服装家纺",
+    "name": "证券",
     "code": "",
-    "chg": 0.0
+    "chg": 0.28
    },
    {
-    "name": "造纸",
+    "name": "厨卫电器",
     "code": "",
-    "chg": 0.0
+    "chg": -0.12
    },
    {
-    "name": "包装印刷",
+    "name": "保险",
     "code": "",
-    "chg": 0.0
+    "chg": -0.42
    },
    {
-    "name": "家居用品",
+    "name": "元件",
     "code": "",
-    "chg": 0.0
+    "chg": -0.51
    },
    {
-    "name": "化学制药",
+    "name": "银行",
     "code": "",
-    "chg": 0.0
+    "chg": -1.02
    },
    {
-    "name": "中药",
+    "name": "医疗服务",
     "code": "",
-    "chg": 0.0
+    "chg": -1.06
    },
    {
-    "name": "生物制品",
+    "name": "机场航运",
     "code": "",
-    "chg": 0.0
+    "chg": -1.21
    }
   ],
   "down": [
    {
-    "name": "白色家电",
+    "name": "煤炭开采加工",
     "code": "",
-    "chg": 0.0
+    "chg": -4.82
    },
    {
-    "name": "黑色家电",
+    "name": "油气开采及服务",
     "code": "",
-    "chg": 0.0
+    "chg": -4.66
    },
    {
-    "name": "饮料制造",
+    "name": "通信设备",
     "code": "",
-    "chg": 0.0
+    "chg": -4.36
    },
    {
-    "name": "食品加工制造",
+    "name": "其他电源设备",
     "code": "",
-    "chg": 0.0
+    "chg": -4.31
    },
    {
-    "name": "纺织制造",
+    "name": "工业金属",
     "code": "",
-    "chg": 0.0
+    "chg": -4.27
    }
   ]
  }
