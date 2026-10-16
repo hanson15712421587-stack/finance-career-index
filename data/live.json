@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-16 10:31:13",
+ "updated_at": "2026-10-16 15:45:11",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-15",
@@ -736,33 +736,33 @@
   "items": [
    {
     "name": "上证指数",
-    "price": 3733.17,
-    "chg": 0.69
+    "price": 3716.28,
+    "chg": 0.24
    },
    {
     "name": "沪深300",
-    "price": 4189.2,
-    "chg": 0.56
+    "price": 4170.61,
+    "chg": 0.11
    },
    {
     "name": "创业板指",
-    "price": 2799.71,
-    "chg": 0.59
+    "price": 2772.38,
+    "chg": -0.39
    },
    {
     "name": "深证成指",
-    "price": 11896.98,
-    "chg": 0.68
+    "price": 11802.46,
+    "chg": -0.12
    },
    {
     "name": "科创50",
-    "price": 1371.16,
-    "chg": 0.86
+    "price": 1358.65,
+    "chg": -0.06
    }
   ]
  },
  "industries": null,
  "errors": {
-  "industries": "'代码'"
+  "industries": "'NoneType' object has no attribute 'text'"
  }
 }
