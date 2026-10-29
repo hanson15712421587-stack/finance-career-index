@@ -1,12 +1,12 @@
 {
- "updated_at": "2026-10-30 03:59:54",
+ "updated_at": "2026-10-30 07:52:09",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-29",
   "cn2": 1.2218,
   "cn5": 1.3297,
   "cn10": 1.6233,
-  "us10": null,
+  "us10": 4.98,
   "spread_10y2y": 0.4015,
   "cn10_hist": [
    [
@@ -761,76 +761,8 @@
    }
   ]
  },
- "industries": {
-  "src": "同花顺",
-  "up": [
-   {
-    "name": "银行",
-    "code": "",
-    "chg": 1.98
-   },
-   {
-    "name": "风电设备",
-    "code": "",
-    "chg": 1.64
-   },
-   {
-    "name": "保险",
-    "code": "",
-    "chg": 1.61
-   },
-   {
-    "name": "煤炭开采加工",
-    "code": "",
-    "chg": 0.73
-   },
-   {
-    "name": "公路铁路运输",
-    "code": "",
-    "chg": 0.39
-   },
-   {
-    "name": "影视院线",
-    "code": "",
-    "chg": 0.35
-   },
-   {
-    "name": "白酒",
-    "code": "",
-    "chg": 0.04
-   },
-   {
-    "name": "机场航运",
-    "code": "",
-    "chg": -0.05
-   }
-  ],
-  "down": [
-   {
-    "name": "元件",
-    "code": "",
-    "chg": -7.08
-   },
-   {
-    "name": "通信设备",
-    "code": "",
-    "chg": -5.63
-   },
-   {
-    "name": "半导体",
-    "code": "",
-    "chg": -5.54
-   },
-   {
-    "name": "自动化设备",
-    "code": "",
-    "chg": -5.17
-   },
-   {
-    "name": "电机",
-    "code": "",
-    "chg": -5.08
-   }
-  ]
+ "industries": null,
+ "errors": {
+  "industries": "HTTPConnectionPool(host='q.10jqka.com.cn', port=80): Read timed out."
  }
 }
