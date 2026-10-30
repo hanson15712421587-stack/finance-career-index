@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-30 07:52:09",
+ "updated_at": "2026-10-30 11:47:16",
  "source": "akshare / 东方财富公开数据",
  "treasury": {
   "date": "2026-10-29",
@@ -732,37 +732,105 @@
   ]
  },
  "indices": {
-  "src": "新浪财经",
+  "src": "东财",
   "items": [
    {
     "name": "上证指数",
-    "price": 3651.4337,
-    "chg": -0.816
+    "price": 3640.54,
+    "chg": -0.3
    },
    {
     "name": "沪深300",
-    "price": 4041.838,
-    "chg": -1.029
+    "price": 4026.47,
+    "chg": -0.38
    },
    {
     "name": "创业板指",
-    "price": 2517.588,
-    "chg": -4.447
+    "price": 2487.91,
+    "chg": -1.18
    },
    {
     "name": "深证成指",
-    "price": 11138.198,
-    "chg": -2.92
+    "price": 11073.08,
+    "chg": -0.58
    },
    {
     "name": "科创50",
-    "price": 1228.0907,
-    "chg": -4.275
+    "price": 1206.66,
+    "chg": -1.74
    }
   ]
  },
- "industries": null,
- "errors": {
-  "industries": "HTTPConnectionPool(host='q.10jqka.com.cn', port=80): Read timed out."
+ "industries": {
+  "src": "同花顺",
+  "up": [
+   {
+    "name": "白酒",
+    "code": "",
+    "chg": 4.25
+   },
+   {
+    "name": "医疗服务",
+    "code": "",
+    "chg": 3.87
+   },
+   {
+    "name": "元件",
+    "code": "",
+    "chg": 2.17
+   },
+   {
+    "name": "港口航运",
+    "code": "",
+    "chg": 2.06
+   },
+   {
+    "name": "生物制品",
+    "code": "",
+    "chg": 1.46
+   },
+   {
+    "name": "中药",
+    "code": "",
+    "chg": 1.43
+   },
+   {
+    "name": "医药商业",
+    "code": "",
+    "chg": 1.37
+   },
+   {
+    "name": "化学制药",
+    "code": "",
+    "chg": 1.26
+   }
+  ],
+  "down": [
+   {
+    "name": "影视院线",
+    "code": "",
+    "chg": -4.4
+   },
+   {
+    "name": "游戏",
+    "code": "",
+    "chg": -3.12
+   },
+   {
+    "name": "文化传媒",
+    "code": "",
+    "chg": -3.0
+   },
+   {
+    "name": "软件开发",
+    "code": "",
+    "chg": -1.74
+   },
+   {
+    "name": "贵金属",
+    "code": "",
+    "chg": -1.68
+   }
+  ]
  }
 }
