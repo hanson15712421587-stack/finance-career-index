@@ -1,40 +1,12 @@
 {
- "updated_at": "2026-11-14 10:49:51",
+ "updated_at": "2026-11-14 17:40:25",
  "source": "akshare / 东方财富公开数据",
  "treasury": null,
  "errors": {
-  "treasury": "module 'akshare' has no attribute 'bond_zh_us_rate'"
+  "treasury": "module 'akshare' has no attribute 'bond_zh_us_rate'",
+  "indices": "module 'akshare' has no attribute 'stock_zh_index_spot_sina'"
  },
- "indices": {
-  "src": "新浪财经",
-  "items": [
-   {
-    "name": "上证指数",
-    "price": 3634.353,
-    "chg": -0.587
-   },
-   {
-    "name": "沪深300",
-    "price": 4016.29,
-    "chg": -0.683
-   },
-   {
-    "name": "创业板指",
-    "price": 2426.084,
-    "chg": -3.321
-   },
-   {
-    "name": "深证成指",
-    "price": 10968.787,
-    "chg": -2.047
-   },
-   {
-    "name": "科创50",
-    "price": 1279.6615,
-    "chg": -2.304
-   }
-  ]
- },
+ "indices": null,
  "industries": {
   "src": "同花顺",
   "up": [
