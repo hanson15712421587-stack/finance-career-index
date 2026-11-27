@@ -1,82 +1,12 @@
 {
- "updated_at": "2026-11-27 12:41:06",
+ "updated_at": "2026-11-27 22:33:09",
  "source": "akshare / 东方财富公开数据",
  "treasury": null,
  "errors": {
   "treasury": "bond_zh_us_rate 已在 1.20.41 更名为 bond_zh_us_yield_em，请改用 ak.bond_zh_us_yield_em；参数与返回的列也可能有调整，用 ak.interface_info(\"bond_zh_us_yield_em\") 查看。完整对照见 https://akshare.akfamily.xyz/changelog.html#changelog-re",
-  "indices": "stock_zh_index_spot_sina 已在 1.20.44 更名为 index_zh_spot_sina，请改用 ak.index_zh_spot_sina；参数与返回的列也可能有调整，用 ak.interface_info(\"index_zh_spot_sina\") 查看。完整对照见 https://akshare.akfamily.xyz/changelog.html#change"
+  "indices": "stock_zh_index_spot_sina 已在 1.20.44 更名为 index_zh_spot_sina，请改用 ak.index_zh_spot_sina；参数与返回的列也可能有调整，用 ak.interface_info(\"index_zh_spot_sina\") 查看。完整对照见 https://akshare.akfamily.xyz/changelog.html#change",
+  "industries": "'代码'"
  },
  "indices": null,
- "industries": {
-  "src": "同花顺",
-  "up": [
-   {
-    "name": "IT服务",
-    "code": "",
-    "chg": 6.42
-   },
-   {
-    "name": "半导体",
-    "code": "",
-    "chg": 6.28
-   },
-   {
-    "name": "电子化学品",
-    "code": "",
-    "chg": 6.12
-   },
-   {
-    "name": "通信设备",
-    "code": "",
-    "chg": 5.52
-   },
-   {
-    "name": "软件开发",
-    "code": "",
-    "chg": 5.35
-   },
-   {
-    "name": "通信服务",
-    "code": "",
-    "chg": 5.22
-   },
-   {
-    "name": "计算机设备",
-    "code": "",
-    "chg": 4.69
-   },
-   {
-    "name": "其他电子",
-    "code": "",
-    "chg": 4.66
-   }
-  ],
-  "down": [
-   {
-    "name": "银行",
-    "code": "",
-    "chg": -1.83
-   },
-   {
-    "name": "机场航运",
-    "code": "",
-    "chg": -1.18
-   },
-   {
-    "name": "保险",
-    "code": "",
-    "chg": -1.14
-   },
-   {
-    "name": "煤炭开采加工",
-    "code": "",
-    "chg": -0.98
-   },
-   {
-    "name": "养殖业",
-    "code": "",
-    "chg": -0.82
-   }
-  ]
- }
+ "industries": null
 }
